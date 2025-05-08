@@ -42,11 +42,27 @@ const eliminarCategoria = (req, res) => {
     });
 };
 
-const obtenerCategorias = (req, res) => {
-    categoriaModel.obtenerCategorias((err, result) => {
+const obtenerCategoria = (req, res) => {
+    const { id } = req.params;
+    categoriaModel.obtenerCategoriaPorId(id, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error al obtener la categoría', error: err });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'Categoría no encontrada' });
+        }
+
+        res.status(200).json({ data: result[0] });
+    });
+};
+
+const listarCategoria = (req, res) => {
+    categoriaModel.obtenerTodasLasCategorias((err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener las categorías', error: err });
         }
+
         res.status(200).json({ data: result });
     });
 };
@@ -55,5 +71,6 @@ module.exports = {
     crearCategoria,
     editarCategoria,
     eliminarCategoria,
-    obtenerCategorias
+    obtenerCategoria,
+    listarCategoria
 };

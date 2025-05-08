@@ -5,10 +5,15 @@ const obtenerUsuarios = (idUsuario, callback) => {
     db.query(sql, [idUsuario], callback);
 };
 
+const listarUsuarios = (callback) => {
+    const sql = 'SELECT * FROM Usuario';
+    db.query(sql, callback);
+};
 
 const crearUsuario = (usuario, callback) => {
-    const sql = `INSERT INTO Usuario (Username, Nombre_apellido, Clave, Edad, Email, Direccion, Telefono, Fecha_registro, id_tipo_usuario)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?)`;
+    const sql = `INSERT INTO Usuario 
+        (Username, Nombre_apellido, Clave, Edad, Email, Direccion, Telefono, Fecha_registro, id_tipo_usuario)
+        VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?)`;
     const values = [
         usuario.Username,
         usuario.Nombre_apellido,
@@ -23,8 +28,9 @@ const crearUsuario = (usuario, callback) => {
 };
 
 const editarUsuario = (id, datos, callback) => {
-    const sql = `UPDATE Usuario SET Username = ?, Nombre_apellido = ?, Clave = ?, Edad = ?, Email = ?, Direccion = ?, Telefono = ?, id_tipo_usuario = ?
-                 WHERE idUsuario = ?`;
+    const sql = `UPDATE Usuario SET 
+        Username = ?, Nombre_apellido = ?, Clave = ?, Edad = ?, Email = ?, Direccion = ?, Telefono = ?, id_tipo_usuario = ?
+        WHERE idUsuario = ?`;
     const values = [
         datos.Username,
         datos.Nombre_apellido,
@@ -44,9 +50,34 @@ const eliminarUsuario = (id, callback) => {
     db.query(sql, [id], callback);
 };
 
+const verificarUsuarioDuplicado = (usuario, callback) => {
+    const sql = `SELECT * FROM Usuario WHERE 
+        Username = ? AND 
+        Nombre_apellido = ? AND 
+        Clave = ? AND 
+        Edad = ? AND 
+        Email = ? AND 
+        Direccion = ? AND 
+        Telefono = ? AND 
+        id_tipo_usuario = ?`;
+    const values = [
+        usuario.Username,
+        usuario.Nombre_apellido,
+        usuario.Clave,
+        usuario.Edad,
+        usuario.Email,
+        usuario.Direccion,
+        usuario.Telefono,
+        usuario.id_tipo_usuario
+    ];
+    db.query(sql, values, callback);
+};
+
 module.exports = {
     crearUsuario,
     editarUsuario,
     eliminarUsuario,
-    obtenerUsuarios  
+    obtenerUsuarios,
+    listarUsuarios,
+    verificarUsuarioDuplicado
 };

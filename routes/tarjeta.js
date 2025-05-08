@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const tarjetaController = require('../controllers/tarjetacontroller');
 
-router.post('/', tarjetaController.crearTarjeta);
-router.put('/:id', tarjetaController.editarTarjeta);
-router.delete('/:id', tarjetaController.eliminarTarjeta);
-router.get('/', tarjetaController.obtenerTarjetas);
+router.post('/crear', tarjetaController.crearTarjeta);
+router.put('/editar/:id', tarjetaController.editarTarjeta);
+router.delete('/eliminar/:id', tarjetaController.eliminarTarjeta);
+router.get('/obtener/:id', tarjetaController.obtenerTarjeta);
+router.get('/listar', tarjetaController.listarTarjeta);
 
 module.exports = router;

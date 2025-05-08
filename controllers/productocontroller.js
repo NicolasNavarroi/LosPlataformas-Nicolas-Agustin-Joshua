@@ -31,10 +31,25 @@ const eliminarProducto = (req, res) => {
     });
 };
 
+
+
 const obtenerProductos = (req, res) => {
+    const { id } = req.params;
+    productoModel.obtenerProductoPorId(id, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error al obtener el producto', error: err });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        res.status(200).json({ data: result[0] });
+    });
+};
+
+const listarProductos = (req, res) => {
     productoModel.obtenerProductos((err, result) => {
         if (err) {
-            return res.status(500).json({ message: 'Error al obtener los productos', error: err });
+            return res.status(500).json({ message: 'Error al listar los productos', error: err });
         }
         res.status(200).json({ data: result });
     });
@@ -44,5 +59,6 @@ module.exports = {
     crearProducto,
     editarProducto,
     eliminarProducto,
-    obtenerProductos
+    obtenerProductos,
+    listarProductos
 };

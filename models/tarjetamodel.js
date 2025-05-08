@@ -39,14 +39,20 @@ const eliminarTarjeta = (id, callback) => {
     db.query(sql, [id], callback);
 };
 
-const obtenerTarjetas = (callback) => {
+const listarTarjeta = (callback) => {
     const sql = 'SELECT * FROM Tarjeta_credito';
     db.query(sql, callback);
+};
+
+const obtenerTarjeta = (id, callback) => {
+    const sql = 'SELECT * FROM Tarjeta_credito WHERE id_tarjeta = ?';
+    db.query(sql, [id], callback);
 };
 
 module.exports = {
     crearTarjeta,
     editarTarjeta,
     eliminarTarjeta,
-    obtenerTarjetas
+    listarTarjeta,
+    obtenerTarjeta
 };

@@ -31,10 +31,23 @@ const eliminarTarjeta = (req, res) => {
     });
 };
 
-const obtenerTarjetas = (req, res) => {
+const obtenerTarjeta = (req, res) => {
+    const { id } = req.params;
+    tarjetaModel.obtenerTarjetaPorId(id, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error al obtener la tarjeta', error: err });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'Tarjeta no encontrada' });
+        }
+        res.status(200).json({ data: result[0] });
+    });
+};
+
+const listarTarjeta = (req, res) => {
     tarjetaModel.obtenerTarjetas((err, result) => {
         if (err) {
-            return res.status(500).json({ message: 'Error al obtener las tarjetas', error: err });
+            return res.status(500).json({ message: 'Error al listar las tarjetas', error: err });
         }
         res.status(200).json({ data: result });
     });
@@ -44,5 +57,6 @@ module.exports = {
     crearTarjeta,
     editarTarjeta,
     eliminarTarjeta,
-    obtenerTarjetas
+    obtenerTarjeta,
+    listarTarjeta
 };

@@ -15,7 +15,12 @@ const eliminarCategoria = (id, callback) => {
     db.query(sql, [id], callback);
 };
 
-const obtenerCategorias = (callback) => {
+const obtenerCategoria = (id, callback) => {
+    const sql = 'SELECT * FROM categoria WHERE id_categoria = ?';
+    db.query(sql, [id], callback);
+};
+
+const listarCategoria = (callback) => {
     const sql = 'SELECT * FROM categoria';
     db.query(sql, callback);
 };
@@ -24,5 +29,6 @@ module.exports = {
     crearCategoria,
     editarCategoria,
     eliminarCategoria,
-    obtenerCategorias
+    obtenerCategoria,
+    listarCategoria
 };

@@ -46,7 +46,13 @@ const eliminarProducto = (id, callback) => {
     db.query(sql, [id], callback);
 };
 
-const obtenerProductos = (callback) => {
+const obtenerProductos = (id, callback) => {
+    const sql = 'SELECT * FROM Producto WHERE idProducto = ?';
+    db.query(sql, [id], callback);
+};
+
+
+const listarProductos = (callback) => {
     const sql = 'SELECT * FROM Producto';
     db.query(sql, callback);
 };
@@ -55,5 +61,6 @@ module.exports = {
     crearProducto,
     editarProducto,
     eliminarProducto,
-    obtenerProductos
+    obtenerProductos,
+    listarProductos
 };

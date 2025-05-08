@@ -31,7 +31,7 @@ const eliminarMarca = (req, res) => {
     });
 };
 
-const obtenerMarcas = (req, res) => {
+const listadoMarcas = (req, res) => {
     marcaModel.obtenerMarcas((err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener las marcas', error: err });
@@ -40,9 +40,25 @@ const obtenerMarcas = (req, res) => {
     });
 };
 
+const obtenerMarca = (req, res) => {
+    const { id } = req.params;
+    marcaModel.obtenerMarcaPorId(id, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error al obtener la marca', error: err });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'Marca no encontrada' });
+        }
+
+        res.status(200).json({ data: result[0] });
+    });
+};
+
 module.exports = {
     crearMarca,
     editarMarca,
     eliminarMarca,
-    obtenerMarcas
+    listadoMarcas,
+    obtenerMarca
 };
