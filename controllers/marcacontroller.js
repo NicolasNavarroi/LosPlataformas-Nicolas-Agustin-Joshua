@@ -32,7 +32,7 @@ const eliminarMarca = (req, res) => {
 };
 
 const listadoMarcas = (req, res) => {
-    marcaModel.obtenerMarcas((err, result) => {
+    marcaModel.listadoMarcas((err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener las marcas', error: err });
         }
@@ -42,7 +42,7 @@ const listadoMarcas = (req, res) => {
 
 const obtenerMarca = (req, res) => {
     const { id } = req.params;
-    marcaModel.obtenerMarcaPorId(id, (err, result) => {
+    marcaModel.obtenerMarca(id, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener la marca', error: err });
         }

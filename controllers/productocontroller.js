@@ -35,7 +35,7 @@ const eliminarProducto = (req, res) => {
 
 const obtenerProductos = (req, res) => {
     const { id } = req.params;
-    productoModel.obtenerProductoPorId(id, (err, result) => {
+    productoModel.obtenerProductos(id, (err, result) => { // <-- AQUÍ EL CAMBIO
         if (err) {
             return res.status(500).json({ message: 'Error al obtener el producto', error: err });
         }
@@ -46,8 +46,9 @@ const obtenerProductos = (req, res) => {
     });
 };
 
+
 const listarProductos = (req, res) => {
-    productoModel.obtenerProductos((err, result) => {
+    productoModel.listarProductos((err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al listar los productos', error: err });
         }

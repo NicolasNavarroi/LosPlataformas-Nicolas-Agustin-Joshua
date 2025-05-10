@@ -33,7 +33,7 @@ const eliminarTarjeta = (req, res) => {
 
 const obtenerTarjeta = (req, res) => {
     const { id } = req.params;
-    tarjetaModel.obtenerTarjetaPorId(id, (err, result) => {
+    tarjetaModel.obtenerTarjeta(id, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener la tarjeta', error: err });
         }
@@ -45,7 +45,7 @@ const obtenerTarjeta = (req, res) => {
 };
 
 const listarTarjeta = (req, res) => {
-    tarjetaModel.obtenerTarjetas((err, result) => {
+    tarjetaModel.listarTarjeta((err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al listar las tarjetas', error: err });
         }

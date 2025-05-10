@@ -44,7 +44,7 @@ const eliminarCategoria = (req, res) => {
 
 const obtenerCategoria = (req, res) => {
     const { id } = req.params;
-    categoriaModel.obtenerCategoriaPorId(id, (err, result) => {
+    categoriaModel.obtenerCategoria(id, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener la categoría', error: err });
         }
@@ -58,7 +58,7 @@ const obtenerCategoria = (req, res) => {
 };
 
 const listarCategoria = (req, res) => {
-    categoriaModel.obtenerTodasLasCategorias((err, result) => {
+    categoriaModel.listarCategoria((err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al obtener las categorías', error: err });
         }

@@ -6,7 +6,7 @@ router.post('/crear', marcaController.crearMarca);
 router.put('/editar/:id', marcaController.editarMarca);
 router.delete('/eliminar/:id', marcaController.eliminarMarca);
 router.get('/listar', marcaController.listadoMarcas);
-router.get('/obtener/:id', marcaController.obtenerMarca);
+router.get('/:id', marcaController.obtenerMarca);
 
 
 module.exports = router;

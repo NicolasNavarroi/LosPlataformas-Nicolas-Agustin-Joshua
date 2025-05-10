@@ -14,7 +14,7 @@ const obtenerUsuarios = (req, res) => {
 };
 
 const listarUsuarios = (req, res) => {
-    usuarioModel.obtenerTodosLosUsuarios((err, resultados) => {
+    usuarioModel.listarUsuarios((err, resultados) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener usuarios' });
         }
